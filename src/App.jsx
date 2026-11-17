@@ -529,7 +529,7 @@ export default function App() {
               value={quickInput}
               onChange={(e) => setQuickInput(e.target.value)}
               placeholder="Smart capture: e.g. Write blog post 45m !high @high #marketing"
-              className="w-full bg-transparent border-none text-xs sm:text-sm focus:outline-none text-slate-800 dark:text-slate-100 placeholder-slate-400"
+              className="w-full bg-transparent border-none text-xs sm:text-sm focus:outline-none text-slate-800 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500"
             />
             <button type="submit" className="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-xl text-xs font-semibold shrink-0">
               Add Task
@@ -546,24 +546,24 @@ export default function App() {
               </div>
               <div className="flex flex-wrap items-center gap-2">
                 <div className="flex items-center space-x-1 bg-slate-100 dark:bg-slate-800 p-1 rounded-xl">
-                  <span className="text-[11px] font-medium text-slate-500 px-2 flex items-center"><Zap className="w-3 h-3 mr-1" /> Energy:</span>
+                  <span className="text-[11px] font-medium text-slate-500 dark:text-slate-400 px-2 flex items-center"><Zap className="w-3 h-3 mr-1" /> Energy:</span>
                   {['all', 'high', 'medium', 'low'].map((lvl) => (
                     <button
                       key={lvl}
                       onClick={() => setEnergyFilter(lvl)}
-                      className={`px-2.5 py-1 rounded-lg text-[11px] font-medium capitalize ${energyFilter === lvl ? 'bg-white dark:bg-slate-700 text-indigo-600 dark:text-indigo-300 shadow-sm' : 'text-slate-500'}`}
+                      className={`px-2.5 py-1 rounded-lg text-[11px] font-medium capitalize ${energyFilter === lvl ? 'bg-white dark:bg-slate-700 text-indigo-600 dark:text-indigo-300 shadow-sm' : 'text-slate-500 dark:text-slate-400'}`}
                     >
                       {lvl}
                     </button>
                   ))}
                 </div>
                 <div className="flex items-center space-x-1 bg-slate-100 dark:bg-slate-800 p-1 rounded-xl">
-                  <span className="text-[11px] font-medium text-slate-500 px-2 flex items-center"><Clock className="w-3 h-3 mr-1" /> Time:</span>
+                  <span className="text-[11px] font-medium text-slate-500 dark:text-slate-400 px-2 flex items-center"><Clock className="w-3 h-3 mr-1" /> Time:</span>
                   {[{ label: 'All', val: 'all' }, { label: '≤ 15m', val: '15' }, { label: '≤ 30m', val: '30' }, { label: '≤ 60m', val: '60' }].map((t) => (
                     <button
                       key={t.val}
                       onClick={() => setTimeAvailableFilter(t.val)}
-                      className={`px-2.5 py-1 rounded-lg text-[11px] font-medium ${timeAvailableFilter === t.val ? 'bg-white dark:bg-slate-700 text-indigo-600 dark:text-indigo-300 shadow-sm' : 'text-slate-500'}`}
+                      className={`px-2.5 py-1 rounded-lg text-[11px] font-medium ${timeAvailableFilter === t.val ? 'bg-white dark:bg-slate-700 text-indigo-600 dark:text-indigo-300 shadow-sm' : 'text-slate-500 dark:text-slate-400'}`}
                     >
                       {t.label}
                     </button>
@@ -576,12 +576,12 @@ export default function App() {
               <div className="lg:col-span-2 space-y-4">
                 <div className="flex items-center space-x-2">
                   <CheckSquare className="w-5 h-5 text-indigo-500" />
-                  <h2 className="text-base font-bold">Today's Action Items ({filteredTasks.length})</h2>
+                  <h2 className="text-base font-bold text-slate-800 dark:text-slate-100">Today's Action Items ({filteredTasks.length})</h2>
                 </div>
                 {filteredTasks.length === 0 ? (
                   <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/80 dark:border-slate-800 p-8 text-center space-y-2">
                     <Coffee className="w-8 h-8 text-indigo-500 mx-auto" />
-                    <p className="text-sm font-semibold">No tasks match your filter!</p>
+                    <p className="text-sm font-semibold text-slate-700 dark:text-slate-200">No tasks match your filter!</p>
                   </div>
                 ) : (
                   <div className="space-y-2.5">
@@ -596,12 +596,12 @@ export default function App() {
                               {task.status === 'completed' && <Check className="w-3.5 h-3.5 stroke-[3]" />}
                             </button>
                             <div className="space-y-1">
-                              <h3 className={`text-sm font-semibold ${task.status === 'completed' ? 'line-through text-slate-400' : ''}`}>{task.title}</h3>
-                              {task.description && <p className="text-xs text-slate-500">{task.description}</p>}
+                              <h3 className={`text-sm font-semibold text-slate-800 dark:text-slate-100 ${task.status === 'completed' ? 'line-through text-slate-400 dark:text-slate-500' : ''}`}>{task.title}</h3>
+                              {task.description && <p className="text-xs text-slate-500 dark:text-slate-400">{task.description}</p>}
                               <div className="flex flex-wrap items-center gap-2 pt-1">
-                                <span className="text-[10px] font-semibold px-2 py-0.5 rounded-md bg-indigo-50 dark:bg-indigo-950 text-indigo-500">{task.priority}</span>
-                                <span className="text-[10px] text-slate-500 bg-slate-100 dark:bg-slate-800 px-2 py-0.5 rounded-md">{task.energyLevel} energy</span>
-                                <span className="text-[10px] text-slate-500 bg-slate-100 dark:bg-slate-800 px-2 py-0.5 rounded-md">{task.estimatedTime}m</span>
+                                <span className="text-[10px] font-semibold px-2 py-0.5 rounded-md bg-indigo-50 dark:bg-indigo-950 text-indigo-600 dark:text-indigo-400">{task.priority}</span>
+                                <span className="text-[10px] text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-slate-800 px-2 py-0.5 rounded-md">{task.energyLevel} energy</span>
+                                <span className="text-[10px] text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-slate-800 px-2 py-0.5 rounded-md">{task.estimatedTime}m</span>
                               </div>
                             </div>
                           </div>
@@ -617,12 +617,12 @@ export default function App() {
                 <div className="bg-gradient-to-br from-indigo-900 to-slate-900 text-white rounded-2xl p-5 border border-indigo-800/50 shadow-md space-y-3">
                   <div className="flex items-center space-x-2">
                     <Play className="w-4 h-4 text-indigo-400 fill-indigo-400" />
-                    <h3 className="text-sm font-bold">Quick Routines</h3>
+                    <h3 className="text-sm font-bold text-white">Quick Routines</h3>
                   </div>
                   {routines.map((rt) => (
                     <div key={rt.id} className="bg-white/10 p-3 rounded-xl flex items-center justify-between">
                       <div>
-                        <p className="text-xs font-bold">{rt.title}</p>
+                        <p className="text-xs font-bold text-white">{rt.title}</p>
                         <p className="text-[10px] text-indigo-300">{rt.steps?.length || 0} steps • {rt.totalDuration}m</p>
                       </div>
                       <button onClick={() => startRoutine(rt)} className="bg-indigo-500 hover:bg-indigo-400 text-white p-2 rounded-lg"><Play className="w-3.5 h-3.5 fill-white" /></button>
@@ -632,18 +632,18 @@ export default function App() {
 
                 <div className="bg-white dark:bg-slate-900 rounded-2xl p-5 border border-slate-200/80 dark:border-slate-800 space-y-3">
                   <div className="flex items-center justify-between">
-                    <h3 className="text-sm font-bold flex items-center gap-1.5"><Flame className="w-4 h-4 text-amber-500" /> Habit Check-In</h3>
-                    <button onClick={() => setIsHabitModalOpen(true)} className="text-xs text-indigo-500 font-semibold">+ Habit</button>
+                    <h3 className="text-sm font-bold flex items-center gap-1.5 text-slate-800 dark:text-slate-100"><Flame className="w-4 h-4 text-amber-500" /> Habit Check-In</h3>
+                    <button onClick={() => setIsHabitModalOpen(true)} className="text-xs text-indigo-500 dark:text-indigo-400 font-semibold">+ Habit</button>
                   </div>
                   {habits.map((habit) => {
                     const done = habit.history?.includes(todayStr);
                     return (
                       <div key={habit.id} className="flex items-center justify-between p-3 rounded-xl bg-slate-50 dark:bg-slate-800/50">
                         <div>
-                          <p className="text-xs font-semibold">{habit.title}</p>
+                          <p className="text-xs font-semibold text-slate-800 dark:text-slate-200">{habit.title}</p>
                           <p className="text-[10px] text-amber-500">{habit.streakCount || 0} streak</p>
                         </div>
-                        <button onClick={() => handleToggleHabitToday(habit.id)} className={`p-2 rounded-xl ${done ? 'bg-emerald-500 text-white' : 'bg-white dark:bg-slate-700 text-slate-400'}`}>
+                        <button onClick={() => handleToggleHabitToday(habit.id)} className={`p-2 rounded-xl ${done ? 'bg-emerald-500 text-white' : 'bg-white dark:bg-slate-700 text-slate-400 dark:text-slate-300'}`}>
                           <Check className="w-4 h-4 stroke-[3]" />
                         </button>
                       </div>
@@ -659,13 +659,13 @@ export default function App() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {[{ key: 'pending', title: 'Pending' }, { key: 'in_progress', title: 'In Progress' }, { key: 'completed', title: 'Completed' }].map((col) => (
               <div key={col.key} className="bg-slate-100/70 dark:bg-slate-900/50 p-4 rounded-2xl border border-slate-200/60 dark:border-slate-800 space-y-3 min-h-[400px]">
-                <h3 className="text-sm font-bold pb-2 border-b border-slate-200 dark:border-slate-800">{col.title}</h3>
+                <h3 className="text-sm font-bold pb-2 border-b border-slate-200 dark:border-slate-800 text-slate-800 dark:text-slate-100">{col.title}</h3>
                 {tasks.filter((t) => t.status === col.key).map((task) => (
                   <div key={task.id} className="bg-white dark:bg-slate-900 p-4 rounded-xl border border-slate-200/80 dark:border-slate-800 space-y-2">
-                    <h4 className="text-xs font-bold">{task.title}</h4>
-                    <div className="flex gap-1 pt-2">
+                    <h4 className="text-xs font-bold text-slate-800 dark:text-slate-100">{task.title}</h4>
+                    <div className="flex gap-1 pt-2 flex-wrap">
                       {['pending', 'in_progress', 'completed'].filter((s) => s !== col.key).map((s) => (
-                        <button key={s} onClick={() => handleUpdateTaskStatus(task.id, s)} className="text-[10px] px-2 py-1 rounded bg-slate-100 dark:bg-slate-800 capitalize">
+                        <button key={s} onClick={() => handleUpdateTaskStatus(task.id, s)} className="text-[10px] px-2 py-1 rounded bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 capitalize">
                           Move to {s.replace('_', ' ')}
                         </button>
                       ))}
@@ -682,12 +682,12 @@ export default function App() {
             {habits.map((habit) => (
               <div key={habit.id} className="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200/80 dark:border-slate-800 space-y-3">
                 <div className="flex justify-between">
-                  <h3 className="text-base font-bold">{habit.title}</h3>
+                  <h3 className="text-base font-bold text-slate-800 dark:text-slate-100">{habit.title}</h3>
                   <button onClick={() => handleDeleteHabit(habit.id)} className="text-slate-400 hover:text-rose-500"><Trash2 className="w-4 h-4" /></button>
                 </div>
                 <div className="flex justify-between items-center">
                   <span className="text-amber-500 font-bold text-sm">{habit.streakCount} Day Streak</span>
-                  <button onClick={() => handleToggleHabitPause(habit.id)} className="text-xs px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800">
+                  <button onClick={() => handleToggleHabitPause(habit.id)} className="text-xs px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">
                     {habit.flexiblePause ? 'Paused (Streak Saved)' : 'Pause Habit'}
                   </button>
                 </div>
@@ -701,13 +701,13 @@ export default function App() {
             {routines.map((rt) => (
               <div key={rt.id} className="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200/80 dark:border-slate-800 space-y-3">
                 <div className="flex justify-between items-center">
-                  <h3 className="text-base font-bold">{rt.title}</h3>
+                  <h3 className="text-base font-bold text-slate-800 dark:text-slate-100">{rt.title}</h3>
                   <button onClick={() => startRoutine(rt)} className="bg-indigo-600 text-white px-3 py-1.5 rounded-xl text-xs font-semibold">Start</button>
                 </div>
                 {rt.steps.map((st, idx) => (
-                  <div key={st.id} className="flex justify-between text-xs p-2 rounded-lg bg-slate-50 dark:bg-slate-800/40">
-                    <span>{idx + 1}. {st.title}</span>
-                    <span>{st.durationMinutes}m</span>
+                  <div key={st.id} className="flex justify-between items-center p-2 rounded-lg bg-slate-50 dark:bg-slate-800/50">
+                    <span className="text-xs text-slate-700 dark:text-slate-300">{idx + 1}. {st.title}</span>
+                    <span className="text-[10px] text-slate-500 dark:text-slate-400">{st.durationMinutes}m</span>
                   </div>
                 ))}
               </div>
@@ -716,88 +716,196 @@ export default function App() {
         )}
 
         {currentView === 'analytics' && (
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-            <div className="bg-white dark:bg-slate-900 p-4 rounded-2xl border border-slate-200/80 dark:border-slate-800">
-              <span className="text-xs text-slate-400">Task Completion</span>
-              <p className="text-2xl font-black text-indigo-500">{stats.taskCompletionRate}%</p>
-            </div>
-            <div className="bg-white dark:bg-slate-900 p-4 rounded-2xl border border-slate-200/80 dark:border-slate-800">
-              <span className="text-xs text-slate-400">Habits Today</span>
-              <p className="text-2xl font-black text-emerald-500">{stats.habitCompletionRate}%</p>
-            </div>
-            <div className="bg-white dark:bg-slate-900 p-4 rounded-2xl border border-slate-200/80 dark:border-slate-800">
-              <span className="text-xs text-slate-400">Longest Streak</span>
-              <p className="text-2xl font-black text-rose-500">{Math.max(...habits.map((h) => h.streakCount), 0)} Days</p>
+          <div className="bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-200/80 dark:border-slate-800 space-y-6">
+            <h2 className="text-lg font-bold text-slate-800 dark:text-slate-100">Productivity Insights</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200/60 dark:border-slate-800 space-y-1">
+                <p className="text-xs text-slate-500 dark:text-slate-400">Task Completion Rate</p>
+                <p className="text-2xl font-extrabold text-indigo-600 dark:text-indigo-400">{stats.taskCompletionRate}%</p>
+                <p className="text-[11px] text-slate-400">{stats.completedTasks} of {stats.totalTasks} tasks completed</p>
+              </div>
+              <div className="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200/60 dark:border-slate-800 space-y-1">
+                <p className="text-xs text-slate-500 dark:text-slate-400">Habit Adherence Today</p>
+                <p className="text-2xl font-extrabold text-amber-500">{stats.habitCompletionRate}%</p>
+                <p className="text-[11px] text-slate-400">{stats.doneHabitsToday} of {stats.totalHabits} habits checked in</p>
+              </div>
             </div>
           </div>
         )}
       </main>
 
-      {activeRoutine && (
-        <div className="fixed inset-0 z-50 bg-slate-950/90 backdrop-blur-md flex items-center justify-center p-4">
-          <div className="bg-slate-900 border border-slate-800 text-white rounded-3xl p-8 max-w-md w-full text-center space-y-6 relative">
-            <button onClick={() => { setIsTimerRunning(false); setActiveRoutine(null); }} className="absolute top-4 right-4 text-slate-400"><X className="w-5 h-5" /></button>
-            <h2 className="text-xl font-black">{activeRoutine.title}</h2>
-            <p className="text-sm text-indigo-300">Step {routineStepIndex + 1}: {activeRoutine.steps[routineStepIndex]?.title}</p>
-            <div className="text-6xl font-mono font-black text-indigo-400">{formatTime(timerRemaining)}</div>
-            <div className="flex justify-center gap-3">
-              <button onClick={() => setIsTimerRunning(!isTimerRunning)} className="px-5 py-2.5 rounded-xl bg-indigo-600 font-bold text-sm">{isTimerRunning ? 'Pause' : 'Resume'}</button>
-              <button onClick={handleNextRoutineStep} className="px-5 py-2.5 rounded-xl bg-slate-800 font-bold text-sm flex items-center gap-1">Next <SkipForward className="w-4 h-4" /></button>
-            </div>
-          </div>
-        </div>
-      )}
-
+      {/* NEW TASK MODAL */}
       {isTaskModalOpen && (
-        <div className="fixed inset-0 z-40 bg-black/60 flex items-center justify-center p-4">
-          <div className="bg-white dark:bg-slate-900 rounded-3xl p-6 max-w-md w-full space-y-4">
+        <div className="fixed inset-0 z-50 bg-slate-950/60 backdrop-blur-sm flex items-center justify-center p-4">
+          <div className="bg-white dark:bg-slate-900 w-full max-w-md rounded-2xl border border-slate-200 dark:border-slate-800 p-6 space-y-4 shadow-xl">
             <div className="flex justify-between items-center">
-              <h3 className="text-base font-bold">New Task</h3>
-              <button onClick={() => setIsTaskModalOpen(false)}><X className="w-5 h-5" /></button>
+              <h3 className="text-base font-bold text-slate-800 dark:text-slate-100">Create New Task</h3>
+              <button onClick={() => setIsTaskModalOpen(false)} className="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200"><X className="w-5 h-5" /></button>
             </div>
             <form onSubmit={handleAddTask} className="space-y-3">
-              <input type="text" required placeholder="Task Title" value={newTask.title} onChange={(e) => setNewTask({ ...newTask, title: e.target.value })} className="w-full p-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-transparent text-xs" />
-              <textarea placeholder="Description" value={newTask.description} onChange={(e) => setNewTask({ ...newTask, description: e.target.value })} className="w-full p-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-transparent text-xs" />
-              <button type="submit" className="w-full py-2.5 bg-indigo-600 text-white rounded-xl text-xs font-semibold">Create Task</button>
+              <div>
+                <label className="text-xs font-semibold text-slate-600 dark:text-slate-400">Task Title</label>
+                <input
+                  type="text"
+                  required
+                  value={newTask.title}
+                  onChange={(e) => setNewTask({ ...newTask, title: e.target.value })}
+                  placeholder="What needs to be done?"
+                  className="w-full mt-1 p-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/50 text-xs text-slate-800 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                />
+              </div>
+              <div>
+                <label className="text-xs font-semibold text-slate-600 dark:text-slate-400">Description (Optional)</label>
+                <textarea
+                  value={newTask.description}
+                  onChange={(e) => setNewTask({ ...newTask, description: e.target.value })}
+                  placeholder="Add details..."
+                  className="w-full mt-1 p-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/50 text-xs text-slate-800 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  rows={2}
+                />
+              </div>
+              <div className="grid grid-cols-2 gap-3">
+                <div>
+                  <label className="text-xs font-semibold text-slate-600 dark:text-slate-400">Priority</label>
+                  <select
+                    value={newTask.priority}
+                    onChange={(e) => setNewTask({ ...newTask, priority: e.target.value })}
+                    className="w-full mt-1 p-2 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/50 text-xs text-slate-800 dark:text-slate-100"
+                  >
+                    <option value="high">High</option>
+                    <option value="medium">Medium</option>
+                    <option value="low">Low</option>
+                  </select>
+                </div>
+                <div>
+                  <label className="text-xs font-semibold text-slate-600 dark:text-slate-400">Energy Level</label>
+                  <select
+                    value={newTask.energyLevel}
+                    onChange={(e) => setNewTask({ ...newTask, energyLevel: e.target.value })}
+                    className="w-full mt-1 p-2 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/50 text-xs text-slate-800 dark:text-slate-100"
+                  >
+                    <option value="high">High Energy</option>
+                    <option value="medium">Medium Energy</option>
+                    <option value="low">Low Energy</option>
+                  </select>
+                </div>
+              </div>
+              <div className="pt-2 flex justify-end space-x-2">
+                <button type="button" onClick={() => setIsTaskModalOpen(false)} className="px-4 py-2 rounded-xl text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">Cancel</button>
+                <button type="submit" className="px-4 py-2 rounded-xl text-xs font-semibold bg-indigo-600 hover:bg-indigo-700 text-white">Save Task</button>
+              </div>
             </form>
           </div>
         </div>
       )}
 
+      {/* NEW HABIT MODAL */}
       {isHabitModalOpen && (
-        <div className="fixed inset-0 z-40 bg-black/60 flex items-center justify-center p-4">
-          <div className="bg-white dark:bg-slate-900 rounded-3xl p-6 max-w-md w-full space-y-4">
+        <div className="fixed inset-0 z-50 bg-slate-950/60 backdrop-blur-sm flex items-center justify-center p-4">
+          <div className="bg-white dark:bg-slate-900 w-full max-w-md rounded-2xl border border-slate-200 dark:border-slate-800 p-6 space-y-4 shadow-xl">
             <div className="flex justify-between items-center">
-              <h3 className="text-base font-bold">New Habit</h3>
-              <button onClick={() => setIsHabitModalOpen(false)}><X className="w-5 h-5" /></button>
+              <h3 className="text-base font-bold text-slate-800 dark:text-slate-100">Create New Habit</h3>
+              <button onClick={() => setIsHabitModalOpen(false)} className="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200"><X className="w-5 h-5" /></button>
             </div>
             <form onSubmit={handleAddHabit} className="space-y-3">
-              <input type="text" required placeholder="Habit Title" value={newHabit.title} onChange={(e) => setNewHabit({ ...newHabit, title: e.target.value })} className="w-full p-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-transparent text-xs" />
-              <button type="submit" className="w-full py-2.5 bg-indigo-600 text-white rounded-xl text-xs font-semibold">Save Habit</button>
+              <div>
+                <label className="text-xs font-semibold text-slate-600 dark:text-slate-400">Habit Title</label>
+                <input
+                  type="text"
+                  required
+                  value={newHabit.title}
+                  onChange={(e) => setNewHabit({ ...newHabit, title: e.target.value })}
+                  placeholder="e.g. Read 15 pages"
+                  className="w-full mt-1 p-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/50 text-xs text-slate-800 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                />
+              </div>
+              <div>
+                <label className="text-xs font-semibold text-slate-600 dark:text-slate-400">Cue Prompt / Reminder</label>
+                <input
+                  type="text"
+                  value={newHabit.cuePrompt}
+                  onChange={(e) => setNewHabit({ ...newHabit, cuePrompt: e.target.value })}
+                  placeholder="e.g. Right after dinner"
+                  className="w-full mt-1 p-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/50 text-xs text-slate-800 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                />
+              </div>
+              <div className="pt-2 flex justify-end space-x-2">
+                <button type="button" onClick={() => setIsHabitModalOpen(false)} className="px-4 py-2 rounded-xl text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">Cancel</button>
+                <button type="submit" className="px-4 py-2 rounded-xl text-xs font-semibold bg-indigo-600 hover:bg-indigo-700 text-white">Save Habit</button>
+              </div>
             </form>
           </div>
         </div>
       )}
 
+      {/* ACTIVE ROUTINE OVERLAY TIMER */}
+      {activeRoutine && (
+        <div className="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-4">
+          <div className="bg-slate-900 border border-slate-800 w-full max-w-lg rounded-3xl p-8 text-center space-y-6 shadow-2xl text-white">
+            <div className="space-y-1">
+              <span className="text-xs uppercase tracking-widest text-indigo-400 font-bold">Active Routine</span>
+              <h2 className="text-xl font-extrabold">{activeRoutine.title}</h2>
+              <p className="text-xs text-slate-400">Step {routineStepIndex + 1} of {activeRoutine.steps.length}: <span className="text-white font-semibold">{activeRoutine.steps[routineStepIndex]?.title}</span></p>
+            </div>
+            <div className="py-8">
+              <span className="text-6xl font-mono font-black tracking-wider text-indigo-400">{formatTime(timerRemaining)}</span>
+            </div>
+            <div className="flex justify-center items-center space-x-4">
+              <button onClick={() => setIsTimerRunning(!isTimerRunning)} className="p-4 rounded-full bg-indigo-600 hover:bg-indigo-500 text-white shadow-lg">
+                {isTimerRunning ? <Pause className="w-6 h-6 fill-white" /> : <Play className="w-6 h-6 fill-white" />}
+              </button>
+              <button onClick={handleNextRoutineStep} className="p-4 rounded-full bg-slate-800 hover:bg-slate-700 text-white shadow-lg">
+                <SkipForward className="w-6 h-6" />
+              </button>
+              <button onClick={() => { setActiveRoutine(null); setIsTimerRunning(false); }} className="p-4 rounded-full bg-slate-800 hover:bg-rose-600 text-white shadow-lg">
+                <X className="w-6 h-6" />
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* AUTH MODAL */}
       {authModalOpen && (
-        <div className="fixed inset-0 z-50 bg-black/60 flex items-center justify-center p-4">
-          <div className="bg-white dark:bg-slate-900 rounded-3xl p-6 max-w-sm w-full space-y-4">
+        <div className="fixed inset-0 z-50 bg-slate-950/60 backdrop-blur-sm flex items-center justify-center p-4">
+          <div className="bg-white dark:bg-slate-900 w-full max-w-sm rounded-2xl border border-slate-200 dark:border-slate-800 p-6 space-y-4 shadow-xl">
             <div className="flex justify-between items-center">
-              <h3 className="text-base font-bold">{authMode === 'login' ? 'Welcome Back' : 'Create Account'}</h3>
-              <button onClick={() => setAuthModalOpen(false)}><X className="w-5 h-5" /></button>
+              <h3 className="text-base font-bold text-slate-800 dark:text-slate-100">{authMode === 'login' ? 'Log In to Cloud' : 'Create Account'}</h3>
+              <button onClick={() => setAuthModalOpen(false)} className="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200"><X className="w-5 h-5" /></button>
             </div>
-            <div className="flex bg-slate-100 dark:bg-slate-800 p-1 rounded-xl text-xs font-semibold">
-              <button onClick={() => setAuthMode('login')} className={`flex-1 py-1.5 rounded-lg ${authMode === 'login' ? 'bg-white dark:bg-slate-700 text-indigo-500' : ''}`}>Log In</button>
-              <button onClick={() => setAuthMode('signup')} className={`flex-1 py-1.5 rounded-lg ${authMode === 'signup' ? 'bg-white dark:bg-slate-700 text-indigo-500' : ''}`}>Sign Up</button>
-            </div>
-            {authError && <p className="text-xs text-rose-500">{authError}</p>}
+            {authError && <div className="p-3 rounded-xl bg-rose-50 dark:bg-rose-950/50 text-rose-600 dark:text-rose-400 text-xs flex items-center gap-2"><AlertCircle className="w-4 h-4 shrink-0" />{authError}</div>}
             <form onSubmit={handleAuthSubmit} className="space-y-3">
-              <input type="email" required placeholder="Email" value={emailInput} onChange={(e) => setEmailInput(e.target.value)} className="w-full p-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-transparent text-xs" />
-              <input type="password" required minLength={6} placeholder="Password" value={passwordInput} onChange={(e) => setPasswordInput(e.target.value)} className="w-full p-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-transparent text-xs" />
-              <button type="submit" className="w-full py-2.5 bg-indigo-600 text-white rounded-xl text-xs font-semibold">
+              <div>
+                <label className="text-xs font-semibold text-slate-600 dark:text-slate-400">Email</label>
+                <input
+                  type="email"
+                  required
+                  value={emailInput}
+                  onChange={(e) => setEmailInput(e.target.value)}
+                  placeholder="you@example.com"
+                  className="w-full mt-1 p-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/50 text-xs text-slate-800 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                />
+              </div>
+              <div>
+                <label className="text-xs font-semibold text-slate-600 dark:text-slate-400">Password</label>
+                <input
+                  type="password"
+                  required
+                  value={passwordInput}
+                  onChange={(e) => setPasswordInput(e.target.value)}
+                  placeholder="••••••••"
+                  className="w-full mt-1 p-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/50 text-xs text-slate-800 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                />
+              </div>
+              <button type="submit" className="w-full mt-2 bg-indigo-600 hover:bg-indigo-700 text-white p-2.5 rounded-xl text-xs font-semibold shadow-sm">
                 {authMode === 'login' ? 'Log In' : 'Sign Up'}
               </button>
             </form>
+            <div className="text-center pt-2">
+              <button onClick={() => setAuthMode(authMode === 'login' ? 'signup' : 'login')} className="text-xs text-indigo-500 dark:text-indigo-400 hover:underline">
+                {authMode === 'login' ? "Don't have an account? Sign up" : 'Already have an account? Log in'}
+              </button>
+            </div>
           </div>
         </div>
       )}
