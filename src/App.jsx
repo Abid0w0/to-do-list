@@ -129,6 +129,9 @@ const INITIAL_ROUTINES = [
   }
 ];
 
+// Reusable card class with crisp white light-mode and bluish gradient dark-mode
+const CARD_STYLE = "bg-white dark:bg-gradient-to-br dark:from-slate-900 dark:via-slate-900 dark:to-indigo-950/60 border border-slate-200/80 dark:border-indigo-900/40 shadow-sm dark:shadow-indigo-950/20";
+
 export default function App() {
   const [user, setUser] = useState(null);
   const [authModalOpen, setAuthModalOpen] = useState(false);
@@ -424,7 +427,7 @@ export default function App() {
   };
 
   return (
-    <div className={`min-h-screen flex flex-col font-sans transition-colors duration-200 ${darkMode ? 'bg-slate-950 text-slate-100' : 'bg-slate-50 text-slate-800'}`}>
+    <div className={`min-h-screen flex flex-col font-sans transition-colors duration-200 ${darkMode ? 'dark bg-slate-950 text-slate-100' : 'bg-slate-50 text-slate-800'}`}>
       <header className="sticky top-0 z-30 backdrop-blur-md bg-opacity-80 border-b border-slate-200 dark:border-slate-800 bg-white/70 dark:bg-slate-900/70 px-4 lg:px-8 py-3 flex items-center justify-between">
         <div className="flex items-center space-x-3">
           <div className="bg-gradient-to-tr from-indigo-600 to-violet-500 text-white p-2 rounded-xl shadow-md shadow-indigo-500/20">
@@ -521,7 +524,7 @@ export default function App() {
         <section>
           <form
             onSubmit={handleQuickAddSubmit}
-            className="bg-white dark:bg-slate-900 p-2 sm:p-2.5 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-sm focus-within:ring-2 focus-within:ring-indigo-500/50 transition-all flex items-center space-x-2"
+            className={`${CARD_STYLE} p-2 sm:p-2.5 rounded-2xl focus-within:ring-2 focus-within:ring-indigo-500/50 transition-all flex items-center space-x-2`}
           >
             <div className="pl-3 text-indigo-500"><Sparkles className="w-4 h-4" /></div>
             <input
@@ -539,31 +542,31 @@ export default function App() {
 
         {currentView === 'today' && (
           <div className="space-y-6">
-            <div className="flex flex-wrap items-center justify-between gap-3 bg-white dark:bg-slate-900 p-3.5 rounded-2xl border border-slate-200/80 dark:border-slate-800">
+            <div className={`flex flex-wrap items-center justify-between gap-3 ${CARD_STYLE} p-3.5 rounded-2xl`}>
               <div className="flex items-center space-x-2">
                 <SlidersHorizontal className="w-4 h-4 text-slate-400" />
                 <span className="text-xs font-semibold text-slate-600 dark:text-slate-300">Smart Filters:</span>
               </div>
               <div className="flex flex-wrap items-center gap-2">
-                <div className="flex items-center space-x-1 bg-slate-100 dark:bg-slate-800 p-1 rounded-xl">
+                <div className="flex items-center space-x-1 bg-slate-100 dark:bg-slate-800/80 p-1 rounded-xl">
                   <span className="text-[11px] font-medium text-slate-500 dark:text-slate-400 px-2 flex items-center"><Zap className="w-3 h-3 mr-1" /> Energy:</span>
                   {['all', 'high', 'medium', 'low'].map((lvl) => (
                     <button
                       key={lvl}
                       onClick={() => setEnergyFilter(lvl)}
-                      className={`px-2.5 py-1 rounded-lg text-[11px] font-medium capitalize ${energyFilter === lvl ? 'bg-white dark:bg-slate-700 text-indigo-600 dark:text-indigo-300 shadow-sm' : 'text-slate-500 dark:text-slate-400'}`}
+                      className={`px-2.5 py-1 rounded-lg text-[11px] font-medium capitalize ${energyFilter === lvl ? 'bg-white dark:bg-indigo-600/30 text-indigo-600 dark:text-indigo-300 shadow-sm' : 'text-slate-500 dark:text-slate-400'}`}
                     >
                       {lvl}
                     </button>
                   ))}
                 </div>
-                <div className="flex items-center space-x-1 bg-slate-100 dark:bg-slate-800 p-1 rounded-xl">
+                <div className="flex items-center space-x-1 bg-slate-100 dark:bg-slate-800/80 p-1 rounded-xl">
                   <span className="text-[11px] font-medium text-slate-500 dark:text-slate-400 px-2 flex items-center"><Clock className="w-3 h-3 mr-1" /> Time:</span>
                   {[{ label: 'All', val: 'all' }, { label: '≤ 15m', val: '15' }, { label: '≤ 30m', val: '30' }, { label: '≤ 60m', val: '60' }].map((t) => (
                     <button
                       key={t.val}
                       onClick={() => setTimeAvailableFilter(t.val)}
-                      className={`px-2.5 py-1 rounded-lg text-[11px] font-medium ${timeAvailableFilter === t.val ? 'bg-white dark:bg-slate-700 text-indigo-600 dark:text-indigo-300 shadow-sm' : 'text-slate-500 dark:text-slate-400'}`}
+                      className={`px-2.5 py-1 rounded-lg text-[11px] font-medium ${timeAvailableFilter === t.val ? 'bg-white dark:bg-indigo-600/30 text-indigo-600 dark:text-indigo-300 shadow-sm' : 'text-slate-500 dark:text-slate-400'}`}
                     >
                       {t.label}
                     </button>
@@ -579,19 +582,19 @@ export default function App() {
                   <h2 className="text-base font-bold text-slate-800 dark:text-slate-100">Today's Action Items ({filteredTasks.length})</h2>
                 </div>
                 {filteredTasks.length === 0 ? (
-                  <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/80 dark:border-slate-800 p-8 text-center space-y-2">
+                  <div className={`${CARD_STYLE} rounded-2xl p-8 text-center space-y-2`}>
                     <Coffee className="w-8 h-8 text-indigo-500 mx-auto" />
                     <p className="text-sm font-semibold text-slate-700 dark:text-slate-200">No tasks match your filter!</p>
                   </div>
                 ) : (
                   <div className="space-y-2.5">
                     {filteredTasks.map((task) => (
-                      <div key={task.id} className={`group bg-white dark:bg-slate-900 p-4 rounded-2xl border ${task.status === 'completed' ? 'border-slate-200/60 dark:border-slate-800/60 opacity-60' : 'border-slate-200/80 dark:border-slate-800 shadow-sm'}`}>
+                      <div key={task.id} className={`group ${CARD_STYLE} p-4 rounded-2xl transition-all ${task.status === 'completed' ? 'opacity-60' : ''}`}>
                         <div className="flex items-start justify-between gap-3">
                           <div className="flex items-start space-x-3">
                             <button
                               onClick={() => handleToggleTask(task.id)}
-                              className={`mt-0.5 w-5 h-5 rounded-lg border flex items-center justify-center ${task.status === 'completed' ? 'bg-emerald-500 border-emerald-500 text-white' : 'border-slate-300 dark:border-slate-600'}`}
+                              className={`mt-0.5 w-5 h-5 rounded-lg border flex items-center justify-center ${task.status === 'completed' ? 'bg-emerald-500 border-emerald-500 text-white' : 'border-slate-300 dark:border-indigo-700/60'}`}
                             >
                               {task.status === 'completed' && <Check className="w-3.5 h-3.5 stroke-[3]" />}
                             </button>
@@ -599,9 +602,9 @@ export default function App() {
                               <h3 className={`text-sm font-semibold text-slate-800 dark:text-slate-100 ${task.status === 'completed' ? 'line-through text-slate-400 dark:text-slate-500' : ''}`}>{task.title}</h3>
                               {task.description && <p className="text-xs text-slate-500 dark:text-slate-400">{task.description}</p>}
                               <div className="flex flex-wrap items-center gap-2 pt-1">
-                                <span className="text-[10px] font-semibold px-2 py-0.5 rounded-md bg-indigo-50 dark:bg-indigo-950 text-indigo-600 dark:text-indigo-400">{task.priority}</span>
-                                <span className="text-[10px] text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-slate-800 px-2 py-0.5 rounded-md">{task.energyLevel} energy</span>
-                                <span className="text-[10px] text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-slate-800 px-2 py-0.5 rounded-md">{task.estimatedTime}m</span>
+                                <span className="text-[10px] font-semibold px-2 py-0.5 rounded-md bg-indigo-50 dark:bg-indigo-950/80 text-indigo-600 dark:text-indigo-400 border border-transparent dark:border-indigo-800/40">{task.priority}</span>
+                                <span className="text-[10px] text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-slate-800/80 px-2 py-0.5 rounded-md">{task.energyLevel} energy</span>
+                                <span className="text-[10px] text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-slate-800/80 px-2 py-0.5 rounded-md">{task.estimatedTime}m</span>
                               </div>
                             </div>
                           </div>
@@ -630,7 +633,7 @@ export default function App() {
                   ))}
                 </div>
 
-                <div className="bg-white dark:bg-slate-900 rounded-2xl p-5 border border-slate-200/80 dark:border-slate-800 space-y-3">
+                <div className={`${CARD_STYLE} rounded-2xl p-5 space-y-3`}>
                   <div className="flex items-center justify-between">
                     <h3 className="text-sm font-bold flex items-center gap-1.5 text-slate-800 dark:text-slate-100"><Flame className="w-4 h-4 text-amber-500" /> Habit Check-In</h3>
                     <button onClick={() => setIsHabitModalOpen(true)} className="text-xs text-indigo-500 dark:text-indigo-400 font-semibold">+ Habit</button>
@@ -638,7 +641,7 @@ export default function App() {
                   {habits.map((habit) => {
                     const done = habit.history?.includes(todayStr);
                     return (
-                      <div key={habit.id} className="flex items-center justify-between p-3 rounded-xl bg-slate-50 dark:bg-slate-800/50">
+                      <div key={habit.id} className="flex items-center justify-between p-3 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-transparent dark:border-indigo-900/20">
                         <div>
                           <p className="text-xs font-semibold text-slate-800 dark:text-slate-200">{habit.title}</p>
                           <p className="text-[10px] text-amber-500">{habit.streakCount || 0} streak</p>
@@ -661,7 +664,7 @@ export default function App() {
               <div key={col.key} className="bg-slate-100/70 dark:bg-slate-900/50 p-4 rounded-2xl border border-slate-200/60 dark:border-slate-800 space-y-3 min-h-[400px]">
                 <h3 className="text-sm font-bold pb-2 border-b border-slate-200 dark:border-slate-800 text-slate-800 dark:text-slate-100">{col.title}</h3>
                 {tasks.filter((t) => t.status === col.key).map((task) => (
-                  <div key={task.id} className="bg-white dark:bg-slate-900 p-4 rounded-xl border border-slate-200/80 dark:border-slate-800 space-y-2">
+                  <div key={task.id} className={`${CARD_STYLE} p-4 rounded-xl space-y-2`}>
                     <h4 className="text-xs font-bold text-slate-800 dark:text-slate-100">{task.title}</h4>
                     <div className="flex gap-1 pt-2 flex-wrap">
                       {['pending', 'in_progress', 'completed'].filter((s) => s !== col.key).map((s) => (
@@ -680,7 +683,7 @@ export default function App() {
         {currentView === 'habits' && (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {habits.map((habit) => (
-              <div key={habit.id} className="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200/80 dark:border-slate-800 space-y-3">
+              <div key={habit.id} className={`${CARD_STYLE} p-5 rounded-2xl space-y-3`}>
                 <div className="flex justify-between">
                   <h3 className="text-base font-bold text-slate-800 dark:text-slate-100">{habit.title}</h3>
                   <button onClick={() => handleDeleteHabit(habit.id)} className="text-slate-400 hover:text-rose-500"><Trash2 className="w-4 h-4" /></button>
@@ -699,7 +702,7 @@ export default function App() {
         {currentView === 'routines' && (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {routines.map((rt) => (
-              <div key={rt.id} className="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200/80 dark:border-slate-800 space-y-3">
+              <div key={rt.id} className={`${CARD_STYLE} p-5 rounded-2xl space-y-3`}>
                 <div className="flex justify-between items-center">
                   <h3 className="text-base font-bold text-slate-800 dark:text-slate-100">{rt.title}</h3>
                   <button onClick={() => startRoutine(rt)} className="bg-indigo-600 text-white px-3 py-1.5 rounded-xl text-xs font-semibold">Start</button>
@@ -716,15 +719,15 @@ export default function App() {
         )}
 
         {currentView === 'analytics' && (
-          <div className="bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-200/80 dark:border-slate-800 space-y-6">
+          <div className={`${CARD_STYLE} p-6 rounded-2xl space-y-6`}>
             <h2 className="text-lg font-bold text-slate-800 dark:text-slate-100">Productivity Insights</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div className="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200/60 dark:border-slate-800 space-y-1">
+              <div className="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/60 dark:border-indigo-900/30 space-y-1">
                 <p className="text-xs text-slate-500 dark:text-slate-400">Task Completion Rate</p>
                 <p className="text-2xl font-extrabold text-indigo-600 dark:text-indigo-400">{stats.taskCompletionRate}%</p>
                 <p className="text-[11px] text-slate-400">{stats.completedTasks} of {stats.totalTasks} tasks completed</p>
               </div>
-              <div className="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200/60 dark:border-slate-800 space-y-1">
+              <div className="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/60 dark:border-indigo-900/30 space-y-1">
                 <p className="text-xs text-slate-500 dark:text-slate-400">Habit Adherence Today</p>
                 <p className="text-2xl font-extrabold text-amber-500">{stats.habitCompletionRate}%</p>
                 <p className="text-[11px] text-slate-400">{stats.doneHabitsToday} of {stats.totalHabits} habits checked in</p>
@@ -737,7 +740,7 @@ export default function App() {
       {/* NEW TASK MODAL */}
       {isTaskModalOpen && (
         <div className="fixed inset-0 z-50 bg-slate-950/60 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-white dark:bg-slate-900 w-full max-w-md rounded-2xl border border-slate-200 dark:border-slate-800 p-6 space-y-4 shadow-xl">
+          <div className={`${CARD_STYLE} w-full max-w-md rounded-2xl p-6 space-y-4 shadow-xl`}>
             <div className="flex justify-between items-center">
               <h3 className="text-base font-bold text-slate-800 dark:text-slate-100">Create New Task</h3>
               <button onClick={() => setIsTaskModalOpen(false)} className="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200"><X className="w-5 h-5" /></button>
@@ -751,7 +754,7 @@ export default function App() {
                   value={newTask.title}
                   onChange={(e) => setNewTask({ ...newTask, title: e.target.value })}
                   placeholder="What needs to be done?"
-                  className="w-full mt-1 p-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/50 text-xs text-slate-800 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  className="w-full mt-1 p-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/60 text-xs text-slate-800 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-indigo-500"
                 />
               </div>
               <div>
@@ -760,7 +763,7 @@ export default function App() {
                   value={newTask.description}
                   onChange={(e) => setNewTask({ ...newTask, description: e.target.value })}
                   placeholder="Add details..."
-                  className="w-full mt-1 p-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/50 text-xs text-slate-800 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  className="w-full mt-1 p-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/60 text-xs text-slate-800 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-indigo-500"
                   rows={2}
                 />
               </div>
@@ -770,7 +773,7 @@ export default function App() {
                   <select
                     value={newTask.priority}
                     onChange={(e) => setNewTask({ ...newTask, priority: e.target.value })}
-                    className="w-full mt-1 p-2 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/50 text-xs text-slate-800 dark:text-slate-100"
+                    className="w-full mt-1 p-2 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/60 text-xs text-slate-800 dark:text-slate-100"
                   >
                     <option value="high">High</option>
                     <option value="medium">Medium</option>
@@ -782,7 +785,7 @@ export default function App() {
                   <select
                     value={newTask.energyLevel}
                     onChange={(e) => setNewTask({ ...newTask, energyLevel: e.target.value })}
-                    className="w-full mt-1 p-2 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/50 text-xs text-slate-800 dark:text-slate-100"
+                    className="w-full mt-1 p-2 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/60 text-xs text-slate-800 dark:text-slate-100"
                   >
                     <option value="high">High Energy</option>
                     <option value="medium">Medium Energy</option>
@@ -802,7 +805,7 @@ export default function App() {
       {/* NEW HABIT MODAL */}
       {isHabitModalOpen && (
         <div className="fixed inset-0 z-50 bg-slate-950/60 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-white dark:bg-slate-900 w-full max-w-md rounded-2xl border border-slate-200 dark:border-slate-800 p-6 space-y-4 shadow-xl">
+          <div className={`${CARD_STYLE} w-full max-w-md rounded-2xl p-6 space-y-4 shadow-xl`}>
             <div className="flex justify-between items-center">
               <h3 className="text-base font-bold text-slate-800 dark:text-slate-100">Create New Habit</h3>
               <button onClick={() => setIsHabitModalOpen(false)} className="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200"><X className="w-5 h-5" /></button>
@@ -816,7 +819,7 @@ export default function App() {
                   value={newHabit.title}
                   onChange={(e) => setNewHabit({ ...newHabit, title: e.target.value })}
                   placeholder="e.g. Read 15 pages"
-                  className="w-full mt-1 p-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/50 text-xs text-slate-800 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  className="w-full mt-1 p-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/60 text-xs text-slate-800 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-indigo-500"
                 />
               </div>
               <div>
@@ -826,7 +829,7 @@ export default function App() {
                   value={newHabit.cuePrompt}
                   onChange={(e) => setNewHabit({ ...newHabit, cuePrompt: e.target.value })}
                   placeholder="e.g. Right after dinner"
-                  className="w-full mt-1 p-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/50 text-xs text-slate-800 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  className="w-full mt-1 p-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/60 text-xs text-slate-800 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-indigo-500"
                 />
               </div>
               <div className="pt-2 flex justify-end space-x-2">
@@ -841,7 +844,7 @@ export default function App() {
       {/* ACTIVE ROUTINE OVERLAY TIMER */}
       {activeRoutine && (
         <div className="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-4">
-          <div className="bg-slate-900 border border-slate-800 w-full max-w-lg rounded-3xl p-8 text-center space-y-6 shadow-2xl text-white">
+          <div className="bg-gradient-to-br from-slate-900 to-indigo-950 border border-indigo-800/50 w-full max-w-lg rounded-3xl p-8 text-center space-y-6 shadow-2xl text-white">
             <div className="space-y-1">
               <span className="text-xs uppercase tracking-widest text-indigo-400 font-bold">Active Routine</span>
               <h2 className="text-xl font-extrabold">{activeRoutine.title}</h2>
@@ -868,7 +871,7 @@ export default function App() {
       {/* AUTH MODAL */}
       {authModalOpen && (
         <div className="fixed inset-0 z-50 bg-slate-950/60 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-white dark:bg-slate-900 w-full max-w-sm rounded-2xl border border-slate-200 dark:border-slate-800 p-6 space-y-4 shadow-xl">
+          <div className={`${CARD_STYLE} w-full max-w-sm rounded-2xl p-6 space-y-4 shadow-xl`}>
             <div className="flex justify-between items-center">
               <h3 className="text-base font-bold text-slate-800 dark:text-slate-100">{authMode === 'login' ? 'Log In to Cloud' : 'Create Account'}</h3>
               <button onClick={() => setAuthModalOpen(false)} className="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200"><X className="w-5 h-5" /></button>
@@ -883,7 +886,7 @@ export default function App() {
                   value={emailInput}
                   onChange={(e) => setEmailInput(e.target.value)}
                   placeholder="you@example.com"
-                  className="w-full mt-1 p-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/50 text-xs text-slate-800 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  className="w-full mt-1 p-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/60 text-xs text-slate-800 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-indigo-500"
                 />
               </div>
               <div>
@@ -894,7 +897,7 @@ export default function App() {
                   value={passwordInput}
                   onChange={(e) => setPasswordInput(e.target.value)}
                   placeholder="••••••••"
-                  className="w-full mt-1 p-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/50 text-xs text-slate-800 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  className="w-full mt-1 p-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/60 text-xs text-slate-800 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-indigo-500"
                 />
               </div>
               <button type="submit" className="w-full mt-2 bg-indigo-600 hover:bg-indigo-700 text-white p-2.5 rounded-xl text-xs font-semibold shadow-sm">
